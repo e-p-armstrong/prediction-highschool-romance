@@ -6,13 +6,15 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 df <- read_delim("student/student-mat.csv",delim=";")
 
 df
-df <- select(df, romantic, studytime, freetime, goout, absences,G3)
+df <- select(df, romantic, studytime, freetime, goout, G3,)
 filter(df, romantic == "yes") # There's a good number of normies, ~ 1/3. Aim 
                               # for above 75% accuracy.
                               # G3 is out of 20
 
 df <- mutate(df, romantic = ifelse(romantic == "yes", 1, 0))
-df
+
+group_by(df,romantic) |> summarize(count = n())
+132/395
 
 split <- initial_split(df, prop=0.75, strata = romantic)
 df_train <- training(split)
