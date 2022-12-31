@@ -31,10 +31,11 @@ df_2 <- select(df_init, romantic, freetime, studytime, higher, famrel, traveltim
 df_2 <- mutate(df_2, romantic = ifelse(romantic == "yes", 1, 0))
 df_2 <- mutate(df_2, higher = ifelse(higher == "yes", 1, 0))
 df_2 <- mutate(df_2, activities = ifelse(activities == "yes", 1, 0))
+df_2 <- mutate(df_2, Pstatus = ifelse(Pstatus == "T", 1, 0))
 df_2
 df_2 <- mutate(df_2, across(everything(), as.character))
 
-df_2
+df_2 |> filter()
 
 split_2 <- initial_split(df_2, prop=0.75, strata = romantic)
 df_train_2 <- training(split_2)
